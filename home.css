@@ -1,0 +1,104 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body, html {
+    width: 100%;
+    height: 100%;
+    font-family: 'Press Start 2P', cursive;
+    overflow: hidden;
+}
+
+.home-screen {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background: linear-gradient(135deg, #ff99cc, #cc66ff, #66ccff);
+    position: relative;
+    color: #fff;
+    text-align: center;
+}
+
+.title {
+    font-size: 3rem;
+    color: #fff;
+    text-shadow: 0 0 10px #ff99cc, 0 0 20px #ff66ff;
+    animation: pulse 2s infinite;
+}
+
+.subtitle {
+    font-size: 1rem;
+    margin-top: 10px;
+    color: #ffe6f0;
+    text-shadow: 0 0 5px #ffb3d9;
+}
+
+.buttons {
+    margin-top: 50px;
+    display: flex;
+    gap: 30px;
+}
+
+.buttons button {
+    padding: 15px 40px;
+    font-size: 1rem;
+    font-family: 'Press Start 2P', cursive;
+    background-color: #ff66cc;
+    border: 3px solid #fff;
+    border-radius: 15px;
+    color: #fff;
+    cursor: pointer;
+    text-shadow: 0 0 5px #ff99cc;
+    box-shadow: 0 0 10px #ff66cc, 0 0 20px #ff99cc inset;
+    transition: all 0.3s ease;
+}
+
+.buttons button:hover {
+    transform: scale(1.1);
+    background-color: #ff33aa;
+    box-shadow: 0 0 20px #ff33aa, 0 0 40px #ff66cc inset;
+}
+
+.stars {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: transparent;
+    pointer-events: none;
+}
+#startBtn {
+    padding: 20px 50px;
+    font-size: 1.2rem;
+    font-family: 'Press Start 2P', cursive;
+    background: linear-gradient(45deg, #ff66cc, #ff99ff);
+    border: 3px solid #fff;
+    border-radius: 20px;
+    color: #fff;
+    cursor: pointer;
+    text-shadow: 0 0 5px #ff99cc;
+    box-shadow: 0 0 20px #ff66cc, 0 0 40px #ff99ff inset;
+    transition: all 0.3s ease;
+    animation: pulse 2s infinite;
+}
+
+#startBtn:hover {
+    transform: scale(1.1);
+    box-shadow: 0 0 30px #ff33aa, 0 0 60px #ff66ff inset;
+}
+
+@keyframes pulse {
+    0%, 100% {
+        transform: scale(1);
+        box-shadow: 0 0 20px #ff66cc, 0 0 40px #ff99ff inset;
+    }
+    50% {
+        transform: scale(1.05);
+        box-shadow: 0 0 30px #ff33aa, 0 0 60px #ff66ff inset;
+    }
+}
+
