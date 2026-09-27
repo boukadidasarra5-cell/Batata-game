@@ -1,323 +1,56 @@
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+:root{
+  --pink:#ff66cc; --pink2:#ff99cc; --pink3:#ff33aa; --purple:#cc66ff; --blue:#66ccff;
+  --panel:#ffe6f2; --dark:#660066;
+  padding-top:env(safe-area-inset-top,0px); padding-bottom:env(safe-area-inset-bottom,0px);
 }
+*{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-padding-top:env(safe-area-inset-top,0px);}
+body{font-family:'Press Start 2P',cursive;color:#fff;height:100%;overflow:hidden;background:#1a0b2e;}
+.screen{position:fixed;inset:0;display:none;}
+.screen.active{display:block;}
 
-body {
-    background: url('kitchen.jpg') no-repeat center center/cover;
-    width: 100%;
-    height: 100vh;
-    font-family: 'Press Start 2P', cursive;
-    overflow: hidden;
-    color: #fff;
-    transition: background-image 1s ease-in-out;
-}
+/* ---------- HOME ---------- */
+#home{background:linear-gradient(135deg,var(--blue),var(--purple),var(--pink2));display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;}
+#home .title{font-size:2.6rem;text-shadow:0 0 10px var(--pink2),0 0 20px #ff66ff;animation:pulse 2s infinite;}
+#home .subtitle{font-size:.9rem;margin-top:14px;color:#ffe6f0;text-shadow:0 0 5px #ffb3d9;}
+#home .buttons{margin-top:40px;display:flex;gap:20px;flex-wrap:wrap;justify-content:center;}
+#home button{padding:16px 28px;font-family:inherit;font-size:.85rem;border:3px solid #fff;border-radius:15px;color:#fff;cursor:pointer;background:linear-gradient(45deg,var(--pink),#ff99ff);box-shadow:0 0 20px var(--pink),0 0 40px #ff99ff inset;transition:.2s;}
+#home button:hover{transform:scale(1.08);}
+#stars{position:absolute;inset:0;pointer-events:none;}
+#stars span{position:absolute;width:2px;height:2px;background:#fff;border-radius:50%;}
+@keyframes pulse{0%,100%{transform:scale(1);}50%{transform:scale(1.05);}}
 
-.game {
-    width: 100%;
-    height: 80vh;
-    position: relative;
-    overflow: hidden;
-}
-#batata {
-  position: absolute;
-  bottom: 50px;
-  left: 40px;
-  width: 190px;
-  height: 190px;
-  background: url('batatarun.png') no-repeat center/cover;
-  image-rendering: pixelated;
-}
+/* ---------- GAME ---------- */
+#gameWrap{background:url('kitchen.jpg') center/cover no-repeat;transition:background-image 1s ease-in-out;}
+#gameWrap.lvl1{background-image:url('garden.jpg');}
+#gameWrap.lvl2{background-image:url('lab.jpg');}
+#gameWrap.lvl3{background-image:url('hell.jpg');}
+.game{width:100%;height:78vh;position:relative;overflow:hidden;}
+#batata{position:absolute;bottom:50px;left:40px;width:150px;height:auto;image-rendering:pixelated;}
+#knife{position:absolute;bottom:44px;left:1000px;width:60px;height:10px;background:linear-gradient(90deg,#ff99cc,#ff66ff);border-radius:2px;box-shadow:2px 2px 5px rgba(0,0,0,.5);transform:rotate(-20deg);}
+#gameHeader{position:absolute;top:0;left:0;right:0;padding-top:env(safe-area-inset-top,0px);z-index:60;}
+.hamburger{position:absolute;top:15px;left:15px;font-size:1.6rem;cursor:pointer;color:#fff;background:rgba(255,105,180,.8);padding:8px 12px;border-radius:8px;box-shadow:0 0 10px var(--pink);}
+.hamburger-menu{position:absolute;top:60px;left:15px;background:rgba(255,240,250,.95);border:3px solid var(--pink);border-radius:12px;padding:12px;display:none;flex-direction:column;gap:12px;z-index:99;box-shadow:0 0 20px var(--pink2);}
+.hamburger-menu.show{display:flex;}
+.hamburger-menu button{font-family:inherit;font-size:.7rem;padding:10px;background:var(--pink2);border:2px solid var(--pink);color:#fff;cursor:pointer;}
+#scoreContainer{position:absolute;top:15px;right:15px;display:flex;flex-direction:column;gap:5px;background:rgba(255,182,193,.5);padding:10px 15px;border-radius:8px;}
+#score,#highScore{font-size:1.1rem;color:var(--pink);text-shadow:2px 2px 0 #cc3399;}
+#lives{font-size:.9rem;}
+#modeBadge{position:absolute;top:15px;left:50%;transform:translateX(-50%);font-size:.6rem;background:rgba(0,0,0,.4);padding:6px 10px;border-radius:8px;}
 
+.overlay{position:fixed;inset:0;background:rgba(0,0,0,.85);display:none;align-items:center;justify-content:center;z-index:200;}
+.overlay.show{display:flex;}
+.panel{background:var(--panel);border:5px solid var(--pink);border-radius:12px;padding:30px 25px;text-align:center;color:var(--dark);width:min(90%,340px);box-shadow:0 0 20px var(--pink);}
+.panel h1{font-size:1.6rem;margin-bottom:16px;color:var(--pink3);animation:blink 1s infinite;}
+.panel h2{font-size:1.3rem;margin-bottom:20px;color:var(--pink3);}
+.panel p{font-size:.85rem;margin-bottom:20px;}
+.panel button{font-family:inherit;font-size:.8rem;padding:10px 18px;margin:6px;background:var(--pink2);border:3px solid var(--pink);color:#fff;cursor:pointer;box-shadow:2px 2px 0 var(--dark);}
+.panel button:hover{background:#ff66ff;transform:scale(1.05);}
+@keyframes blink{0%,50%,100%{opacity:1;}25%,75%{opacity:0;}}
 
-
-
-#knife {
-  position: absolute;
-  bottom: 40px; /* remonte le couteau */
-  left: 1000px;
-  width: 60px;
-  height: 10px;
-  background: linear-gradient(90deg, #ff99cc, #ff66ff);
-  border-radius: 2px;
-  box-shadow: 2px 2px 5px rgba(0,0,0,0.5);
-  transform: rotate(-20deg);
-}
-
-
-
-#homeBtn {
-    position: absolute;
-    top: 15px;
-    left: 15px;
-    padding: 10px 20px;
-    font-family: 'Press Start 2P', cursive;
-    font-size: 1rem;
-    background: linear-gradient(45deg, #ff99cc, #ff66ff);
-    color: #fff;
-    border: 3px solid #fff;
-    border-radius: 15px;
-    cursor: pointer;
-    text-shadow: 0 0 5px #ff99cc;
-    box-shadow: 0 0 20px #ff66ff, 0 0 40px #ff99ff inset;
-    z-index: 50;
-    transition: all 0.3s ease;
-}
-
-#homeBtn:hover {
-    transform: scale(1.05);
-    box-shadow: 0 0 30px #ff33aa, 0 0 60px #ff66ff inset;
-}
-
-#scoreContainer {
-    position: absolute;
-    top: 15px;
-    right: 15px;
-    display: flex;
-    flex-direction: column;
-    gap: 5px;
-    background-color: rgba(255, 182, 193, 0.5);
-    padding: 10px 15px;
-    border-radius: 8px;
-}
-
-#score, #highScore {
-    font-size: 1.5rem;
-    font-weight: bold;
-    color: #ff66cc;
-    text-shadow: 2px 2px 0 #cc3399, 4px 4px 0 #993366;
-}
-
-#gameOverScreen {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0,0,0,0.85);
-    display: none;
-    justify-content: center;
-    align-items: center;
-    z-index: 100;
-}
-
-#gameOverContent {
-    background-color: #ffccff;
-    border: 6px solid #ff66cc;
-    padding: 40px 30px;
-    text-align: center;
-    color: #660066;
-    width: 350px;
-    box-shadow: 0 0 15px #ff66cc, 0 0 30px #ff33aa inset;
-}
-
-#gameOverContent h1 {
-    font-size: 2.5rem;
-    margin-bottom: 20px;
-    color: #ff33aa;
-    text-shadow: 2px 2px 0 #660066, 4px 4px 0 #330033;
-    animation: blink 1s infinite;
-}
-
-#gameOverContent p {
-    font-size: 1.2rem;
-    margin-bottom: 30px;
-    color: #ff66cc;
-    text-shadow: 1px 1px 0 #660066;
-}
-
-.options button {
-    font-family: 'Press Start 2P', cursive;
-    font-size: 1rem;
-    padding: 12px 24px;
-    margin: 0 10px;
-    background-color: #ff99cc;
-    border: 3px solid #ff66cc;
-    color: #fff;
-    cursor: pointer;
-    transition: all 0.2s;
-    box-shadow: 2px 2px 0 #660066;
-}
-
-.options button:hover {
-    background-color: #ff66ff;
-    transform: scale(1.05);
-}
-
-@keyframes blink {
-    0%,50%,100% { opacity: 1; }
-    25%,75% { opacity: 0; }
-}
-
-.hamburger {
-    position: absolute;
-    top: 15px;
-    left: 15px;
-    font-size: 2rem;
-    cursor: pointer;
-    z-index: 100;
-    color: #fff;
-    background-color: rgba(255, 105, 180, 0.8);
-    padding: 8px 12px;
-    border-radius: 8px;
-    box-shadow: 0 0 10px #ff66cc;
-    transition: all 0.3s ease;
-}
-
-.hamburger:hover {
-    background-color: #ff66ff;
-    transform: scale(1.1);
-}
-
-.hamburger-menu {
-    position: absolute;
-    top: 60px;
-    left: 15px;
-    background-color: rgba(255, 240, 250, 0.95);
-    border: 3px solid #ff66cc;
-    border-radius: 12px;
-    padding: 12px;
-    display: none;
-    flex-direction: column;
-    gap: 12px;
-    z-index: 99;
-    box-shadow: 0 0 20px #ff99cc;
-}
-
-.hamburger-menu button {
-    font-family: 'Press Start 2P', cursive;
-    font-size: 0.8rem;
-    padding: 10px;
-    background-color: #ff99cc;
-    border: 2px solid #ff66cc;
-    color: #fff;
-    cursor: pointer;
-    box-shadow: 2px 2px 0 #660066;
-    transition: all 0.2s;
-}
-
-.hamburger-menu button:hover {
-    background-color: #ff66ff;
-    transform: scale(1.05);
-}
-#pauseMenu {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0,0,0,0.85);
-    display: none;
-    justify-content: center;
-    align-items: center;
-    z-index: 200;
-}
-
-.pauseContent {
-    background-color: #ffe6f2;
-    border: 4px solid #ff66cc;
-    padding: 40px 30px;
-    border-radius: 15px;
-    text-align: center;
-    box-shadow: 0 0 20px #ff99cc;
-}
-
-.pauseContent h2 {
-    font-size: 2rem;
-    color: #ff33aa;
-    margin-bottom: 30px;
-    text-shadow: 2px 2px 0 #660066;
-}
-
-.pauseContent button {
-    font-family: 'Press Start 2P', cursive;
-    font-size: 1rem;
-    padding: 12px 24px;
-    margin: 10px;
-    background-color: #ff99cc;
-    border: 3px solid #ff66cc;
-    color: #fff;
-    cursor: pointer;
-    transition: all 0.2s;
-    box-shadow: 2px 2px 0 #660066;
-}
-
-.pauseContent button:hover {
-    background-color: #ff66ff;
-    transform: scale(1.05);
-}
-
-
-
-
-@media screen and (max-width: 768px) {
-    body {
-        font-size: 12px;
-        overflow: auto;
-    }
-
-    .game {
-        height: 60vh;
-    }
-
-    #batata {
-        width: 40px;
-        height: 60px;
-        left: 50px;
-    }
-
-    #knife {
-        width: 40px;
-        height: 8px;
-        bottom: 40px;
-        left: 100%;
-    }
-
-    #scoreContainer {
-        top: 10px;
-        right: 10px;
-        padding: 8px 10px;
-    }
-
-    #score, #highScore {
-        font-size: 1rem;
-    }
-
-    .hamburger {
-        top: 10px;
-        left: 10px;
-        font-size: 1.5rem;
-        padding: 6px 10px;
-    }
-
-    .hamburger-menu {
-        top: 50px;
-        left: 10px;
-        padding: 10px;
-        gap: 8px;
-    }
-
-    .hamburger-menu button {
-        font-size: 0.7rem;
-        padding: 8px;
-    }
-
-    #gameOverContent {
-        width: 90%;
-        padding: 20px;
-    }
-
-    #gameOverContent h1 {
-        font-size: 2rem;
-    }
-
-    #gameOverContent p {
-        font-size: 1rem;
-    }
-
-    .options button {
-        font-size: 0.8rem;
-        padding: 10px 20px;
-    }
+@media screen and (max-width:768px){
+  #batata{width:85px;}
+  #knife{width:36px;height:8px;bottom:40px;}
+  #score,#highScore{font-size:.8rem;}
+  #lives{font-size:.7rem;}
 }

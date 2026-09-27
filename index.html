@@ -1,51 +1,62 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Batata Game 🥔</title>
-    <link rel="stylesheet" href="style.css">
-    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Batata Game 🥔</title>
+<link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <div class="game">
-        <div id="batata"></div>
-        <div id="knife"></div>
-    </div>
 
-    <div id="gameHeader">
-        <div class="hamburger" onclick="toggleHamburgerMenu()">☰</div>
-        <div id="hamburgerMenu" class="hamburger-menu">
-            <button onclick="goHome()">HOME</button>
-            <button onclick="toggleMode()">MODE</button>
-        </div>
-        <div id="scoreContainer">
-            <p id="score">Score : 0</p>
-            <p id="highScore">High Score : 0</p>
-            <p id="lives">Vies : ❤️❤️❤️</p>
-        </div>
-    </div>
+<div id="home" class="screen active">
+  <div id="stars"></div>
+  <h1 class="title">BATATA GAME</h1>
+  <p class="subtitle">DON'T LET BATATA DIE!</p>
+  <div class="buttons">
+    <button id="startBtn">JOUER</button>
+    <button id="settingsBtn">🔊 SON: ON</button>
+  </div>
+</div>
 
-    <div id="gameOverScreen">
-        <div id="gameOverContent">
-            <h1>RIP BATATA</h1>
-            <p>Continue ?</p>
-            <div class="options">
-                <button id="yesBtn">YES</button>
-                <button id="noBtn">NO</button>
-            </div>
-        </div>
+<div id="gameWrap" class="screen">
+  <div class="game">
+    <img id="batata" src="batatarun.png" alt="batata">
+    <div id="knife"></div>
+  </div>
+  <div id="gameHeader">
+    <div class="hamburger" id="hamBtn">☰</div>
+    <div id="hamburgerMenu" class="hamburger-menu">
+      <button id="homeBtn2">HOME</button>
+      <button id="modeBtn">MODE</button>
     </div>
-
-    <div id="pauseMenu">
-        <div class="pauseContent">
-            <h2>Pause</h2>
-            <button onclick="resumeGame()">Reprendre</button>
-            <button onclick="restartGame()">Recommencer</button>
-            <button onclick="quitGame()">Quitter</button>
-        </div>
+    <div id="modeBadge">Mode : Normal</div>
+    <div id="scoreContainer">
+      <p id="score">Score : 0</p>
+      <p id="highScore">High Score : 0</p>
+      <p id="lives">Vies : ❤️❤️❤️</p>
     </div>
+  </div>
+</div>
 
-    <script src="script.js"></script>
+<div id="gameOverScreen" class="overlay">
+  <div class="panel">
+    <h1>RIP BATATA</h1>
+    <p>Continue ?</p>
+    <button id="yesBtn">YES</button>
+    <button id="noBtn">NO</button>
+  </div>
+</div>
+
+<div id="pauseMenu" class="overlay">
+  <div class="panel">
+    <h2>Pause</h2>
+    <button id="resumeBtn">Reprendre</button>
+    <button id="restartBtn">Recommencer</button>
+    <button id="quitBtn">Quitter</button>
+  </div>
+</div>
+
+<script src="script.js"></script>
 </body>
 </html>
