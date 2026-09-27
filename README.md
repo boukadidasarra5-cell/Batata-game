@@ -23,7 +23,7 @@ Petit jeu 2D style "endless runner" : évite le couteau qui fonce sur Batata en 
 ├── lab.jpg                    # fond niveau 2 (score ≥ 20)
 └── hell.jpg                     # fond niveau 3 (score ≥ 30)
 ```
-
+**Démo en ligne :** https://boukadidasarra5-cell.github.io/Batata-game/
 ## 💻 Tester en local
 
 Ouvrir simplement `index.html` dans un navigateur, ou lancer un petit serveur local (recommandé pour éviter les soucis de chemins relatifs) :
